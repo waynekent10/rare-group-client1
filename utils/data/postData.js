@@ -40,8 +40,7 @@ const updatePost = (id, post) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify(post),
   })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then(resolve)
     .catch(reject);
 });
 

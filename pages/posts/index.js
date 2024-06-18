@@ -39,6 +39,7 @@ function Posts() {
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
                 <th scope="col">Category</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -49,6 +50,16 @@ function Posts() {
                     <td>{post?.title}</td>
                     <td>{post?.rare_user.first_name}</td>
                     <td>{post?.category.label}</td>
+                    <td>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={() => {
+                          router.push(`/posts/${post.id}`);
+                        }}
+                      >Edit
+                      </button>
+                    </td>
                   </tr>
                 ))}
             </tbody>

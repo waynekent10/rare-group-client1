@@ -6,9 +6,9 @@ import { Button, Form } from 'react-bootstrap';
 import { createPost, getCategories, updatePost } from '../../utils/data/postData';
 
 const initialState = {
-  id: 0,
+  id: '',
   title: '',
-  imageUrl: '',
+  image_url: '',
   content: '',
   publication_date: '',
   category: 0,
@@ -28,11 +28,12 @@ const PostForm = ({ postObj, user }) => {
       setFormInput({
         id: postObj.id,
         title: postObj.title,
-        imageUrl: postObj.imageUrl,
+        image_url: postObj.image_url,
         content: postObj.content,
         category: postObj.category.id,
         rare_user: user.id,
         approved: postObj.approved,
+        publication_date: postObj.publication_date,
       });
     }
   }, [postObj, user.id]);
@@ -52,7 +53,7 @@ const PostForm = ({ postObj, user }) => {
       const payload = {
         id: formInput.id,
         title: formInput.title,
-        imageUrl: formInput.image_url,
+        image_url: formInput.image_url,
         content: formInput.content,
         category: formInput.category,
         publication_date: formInput.publication_date,
@@ -61,9 +62,9 @@ const PostForm = ({ postObj, user }) => {
       };
       console.warn({ payload });
       updatePost(formInput.id, payload)
-        .then(() => router.push(`/posts/${postObj.id}`));
+        .then(() => router.push('/posts'));
     } else {
-      const payload = { ...formInput, rareUser: user.id };
+      const payload = { ...formInput, rare_user: user.id };
       console.warn('Payload:', payload);
       createPost(payload)
         .then(() => router.push('/posts'));
@@ -78,7 +79,7 @@ const PostForm = ({ postObj, user }) => {
             <Form.Label>Title</Form.Label>
             <Form.Control name="title" required value={formInput.title} onChange={handleChange} />
             <Form.Label>Image</Form.Label>
-            <Form.Control name="imageUrl" required value={formInput.imageUrl} onChange={handleChange} />
+            <Form.Control name="imageUrl" required value={formInput.image_url} onChange={handleChange} />
             <Form.Label>Content</Form.Label>
             <Form.Control name="content" required value={formInput.content} onChange={handleChange} />
           </Form.Group>
@@ -114,7 +115,7 @@ PostForm.propTypes = {
   postObj: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
-    imageUrl: PropTypes.string,
+    image_url: PropTypes.string,
     content: PropTypes.string,
     category: PropTypes.number,
     rare_user: PropTypes.number,
