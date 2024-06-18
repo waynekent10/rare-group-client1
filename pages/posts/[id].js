@@ -35,7 +35,7 @@ export default function ViewSinglePost() {
           }}
         >View
         </button>
-        {editPost?.rare_user.first_name} {editPost?.rare_user.last_name}
+        {editPost.rare_user?.first_name} {editPost.rare_user?.last_name}
       </div>
       <div>
         <Image src={editPost?.image_url} alt={editPost?.imageUrl} className="post-img-detail" />
