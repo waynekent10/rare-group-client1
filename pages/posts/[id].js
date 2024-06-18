@@ -14,6 +14,17 @@ export default function ViewSinglePost() {
     getSinglePost(id).then(setEditPost);
   }, [id]);
 
+  // const handleDelete = async () => {
+  //   if (window.confirm('Are you sure you want to delete this post?')) {
+  //     try {
+  //       await deleteSinglePost(id);
+  //       router.push('/posts'); // Redirect to posts list after deletion
+  //     } catch (error) {
+  //       console.error('Failed to delete the post', error);
+  //     }
+  //   }
+  // };
+
   return (
 
     <>
@@ -51,6 +62,15 @@ export default function ViewSinglePost() {
         </button>
       </div>
       <div>{editPost?.content}</div>
+      <div>
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          // onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
     </>
   );
 }
