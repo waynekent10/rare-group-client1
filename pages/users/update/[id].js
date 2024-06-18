@@ -12,7 +12,7 @@ export default function NewUser() {
 
   useEffect(() => {
     getSingleUser(id).then(setAUser);
-  }, [id]);
+  }, [id, setAUser]);
 
   return (
     <div>
