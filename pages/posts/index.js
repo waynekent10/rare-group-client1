@@ -55,9 +55,17 @@ function Posts() {
                         type="button"
                         className="btn btn-outline-secondary"
                         onClick={() => {
-                          router.push(`/posts/${post.id}`);
+                          router.push(`/posts/edit/${post.id}`);
                         }}
                       >Edit
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={() => {
+                          router.push(`/posts/${post.id}`);
+                        }}
+                      >View
                       </button>
                     </td>
                   </tr>
