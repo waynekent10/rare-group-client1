@@ -10,7 +10,6 @@ export default function UserCard({
   first_name,
   last_name,
   bio,
-  profile_image_url,
   email,
   created_on,
   active,
@@ -18,10 +17,9 @@ export default function UserCard({
   id,
 }) {
   const router = useRouter();
-  const { user, userLoading } = useAuth();
+  const { user } = useAuth();
 
-  console.log('from userCard: ***  ', 'first_name:', first_name, 'last_name:', last_name, 'bio:', bio, 'profile image url:', profile_image_url,
-    'email:', email, 'created_on:', created_on, 'active:', active, 'is_staff:', is_staff, 'id:', id);
+  // console.log('from userCard: ***  ', 'first_name:', first_name, 'last_name:', last_name, 'bio:', bio, 'profile image url:', profile_image_url,'email:', email, 'created_on:', created_on, 'active:', active, 'is_staff:', is_staff, 'id:', id);
 
   const deleteThisUser = () => {
     if (window.confirm(`Delete ${first_name}`)) {
@@ -59,7 +57,6 @@ UserCard.propTypes = {
   first_name: PropTypes.string.isRequired,
   last_name: PropTypes.string.isRequired,
   bio: PropTypes.string.isRequired,
-  profile_image_url: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   created_on: PropTypes.number.isRequired,
   active: PropTypes.number.isRequired,

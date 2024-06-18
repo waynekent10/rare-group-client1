@@ -18,7 +18,7 @@ const initialState = {
   is_staff: '',
 };
 
-export default function UserForm({ user, id, update }) {
+export default function UserForm({ user, id }) {
   const [currentUser, setCurrentUser] = useState(initialState);
   const router = useRouter();
   // const { user, userLoading } = useAuth();
@@ -152,7 +152,6 @@ export default function UserForm({ user, id, update }) {
 }
 UserForm.propTypes = {
   id: PropTypes.number,
-  update: PropTypes.bool,
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
   }).isRequired,
@@ -160,5 +159,4 @@ UserForm.propTypes = {
 
 UserForm.defaultProps = {
   id: null,
-  update: undefined,
 };
