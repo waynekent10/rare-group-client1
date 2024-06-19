@@ -18,7 +18,7 @@ export default function EditSinglePost() {
     <div>
       <button
         type="button"
-        className="btn btn-outline-secondary"
+        className="btn btn-outline-danger"
         onClick={() => {
           router.push('/posts');
         }}

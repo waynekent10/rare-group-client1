@@ -23,17 +23,18 @@ function Posts() {
     <>
       <button
         type="button"
-        className="btn btn-outline-secondary"
+        className="btn-add-post"
         onClick={() => {
           router.push('/posts/new');
         }}
-      >Add Post
+      >
+        Add Post
       </button>
       <article className="posts">
         {posts.length === 0 ? (
-          <p>No posts available.</p>
+          <p className="no-posts">No posts available.</p>
         ) : (
-          <table className="table table-striped table-hover">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">Title</th>
@@ -53,19 +54,21 @@ function Posts() {
                     <td>
                       <button
                         type="button"
-                        className="btn btn-outline-secondary"
+                        className="btn-edit"
                         onClick={() => {
                           router.push(`/posts/edit/${post.id}`);
                         }}
-                      >Edit
+                      >
+                        Edit
                       </button>
                       <button
                         type="button"
-                        className="btn btn-outline-secondary"
+                        className="btn-view"
                         onClick={() => {
                           router.push(`/posts/${post.id}`);
                         }}
-                      >View
+                      >
+                        View
                       </button>
                     </td>
                   </tr>
