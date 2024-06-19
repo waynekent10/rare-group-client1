@@ -6,7 +6,7 @@ import { Button, Form } from 'react-bootstrap';
 import { createPost, getCategories, updatePost } from '../../utils/data/postData';
 
 const initialState = {
-  id: '',
+  // id: '',
   title: '',
   image_url: '',
   content: '',
@@ -79,7 +79,7 @@ const PostForm = ({ postObj, user }) => {
             <Form.Label>Title</Form.Label>
             <Form.Control name="title" required value={formInput.title} onChange={handleChange} />
             <Form.Label>Image</Form.Label>
-            <Form.Control name="imageUrl" required value={formInput.image_url} onChange={handleChange} />
+            <Form.Control name="image_url" required value={formInput.image_url} onChange={handleChange} />
             <Form.Label>Content</Form.Label>
             <Form.Control name="content" required value={formInput.content} onChange={handleChange} />
           </Form.Group>
