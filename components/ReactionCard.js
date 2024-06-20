@@ -21,7 +21,7 @@ export default function ReactionCard({
   };
   return (
     <>
-      <Card className="text-center">
+      <Card className="text-center" style={{ width: '18rem', margin: '10px' }}>
         <Card.Header>{label}</Card.Header>
         <Card.Body>
           <Card.Img variant="top" src={image_url} />
