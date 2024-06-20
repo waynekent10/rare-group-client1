@@ -1,14 +1,16 @@
-// CommentForm.js
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { createComment } from '../../utils/data/commentData';
+import { useAuth } from '../../utils/context/authContext';
 
 const CommentForm = ({ postId, onCommentAdded }) => {
   const [content, setContent] = useState('');
+  const { user } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const newComment = {
+      author: user.id,
       post: postId,
       content,
     };

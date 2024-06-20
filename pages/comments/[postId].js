@@ -13,7 +13,7 @@ const CommentsPage = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const commentsData = await getComments(postId);
+        const commentsData = await getComments(postId.toString());
         setComments(commentsData);
       } catch (error) {
         console.error('Error fetching comments:', error);
