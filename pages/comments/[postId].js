@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import CommentCard from '../../components/comments/CommentCard';
 import CommentForm from '../../components/comments/CommentForm';
-import { getComments, deleteComment } from '../../utils/data/commentData';
+import { getComments, deleteComment, updateComment } from '../../utils/data/commentData';
 
 const CommentsPage = () => {
   const [comments, setComments] = useState([]);
@@ -36,6 +36,15 @@ const CommentsPage = () => {
     }
   };
 
+  const handleCommentUpdate = async (commentId, content) => {
+    try {
+      const updatedComment = await updateComment(commentId, content);
+      setComments(comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment)));
+    } catch (error) {
+      console.error('Error updating comment:', error);
+    }
+  };
+
   return (
     <div>
       <h1>Comments</h1>
@@ -47,6 +56,7 @@ const CommentsPage = () => {
             <CommentCard
               key={comment.id}
               comment={comment}
+              onUpdate={handleCommentUpdate}
               onDelete={handleDeleteComment}
             />
           ))
