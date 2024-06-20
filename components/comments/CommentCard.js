@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
-const CommentCard = ({ comment, onDelete }) => {
+const CommentCard = ({ comment, onUpdate, onDelete }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [content, setContent] = useState(comment.content);
+
+  const handleUpdate = () => {
+    onUpdate(comment.id, content);
+    setIsEditing(false);
+  };
+
   const handleDelete = () => {
     onDelete(comment.id);
   };
@@ -12,8 +20,32 @@ const CommentCard = ({ comment, onDelete }) => {
       <p>
         <strong>{comment.author.username}</strong> <small>{new Date(comment.created_on).toLocaleString()}</small>
       </p>
-      <p>{comment.content}</p>
-      <Button onClick={handleDelete} className="btn btn-danger">Delete</Button>
+      {isEditing ? (
+        <Form.Group>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <Button variant="primary" onClick={handleUpdate}>
+            Save
+          </Button>
+          <Button variant="secondary" onClick={() => setIsEditing(false)}>
+            Cancel
+          </Button>
+        </Form.Group>
+      ) : (
+        <>
+          <p>{comment.content}</p>
+          <Button variant="primary" onClick={() => setIsEditing(true)}>
+            Edit
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </>
+      )}
     </div>
   );
 };
@@ -27,6 +59,7 @@ CommentCard.propTypes = {
     content: PropTypes.string.isRequired,
     created_on: PropTypes.string.isRequired,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
