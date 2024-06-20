@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Image } from 'react-bootstrap';
-import { getSinglePost } from '../../utils/data/postData';
+import { deleteSinglePost, getSinglePost } from '../../utils/data/postData';
 
 export default function ViewSinglePost() {
   const [post, setPost] = useState({});
@@ -13,6 +13,17 @@ export default function ViewSinglePost() {
       getSinglePost(id).then(setPost);
     }
   }, [id]);
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      try {
+        await deleteSinglePost(id);
+        router.push('/posts');
+      } catch (error) {
+        console.error('Failed to delete the post', error);
+      }
+    }
+  };
 
   return (
     <>
@@ -29,12 +40,10 @@ export default function ViewSinglePost() {
         </button>
         <button
           type="button"
-          className="btn btn-outline-secondary"
-          onClick={() => {
-            router.push(`/posts/${post.id}`);
-          }}
+          className="btn btn-outline-danger"
+          onClick={handleDelete}
         >
-          View
+          Delete
         </button>
         {post.rare_user?.first_name} {post.rare_user?.last_name}
       </div>

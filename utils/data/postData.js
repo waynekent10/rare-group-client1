@@ -51,10 +51,22 @@ const getCategories = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteSinglePost = (post) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/posts/${post}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getPosts,
   getSinglePost,
   createPost,
   updatePost,
   getCategories,
+  deleteSinglePost,
 };
