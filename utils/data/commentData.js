@@ -1,4 +1,3 @@
-// api.js
 import { clientCredentials } from '../client';
 
 const getComments = (postId) => new Promise((resolve, reject) => {
@@ -10,7 +9,10 @@ const getComments = (postId) => new Promise((resolve, reject) => {
       return response.json();
     })
     .then(resolve)
-    .catch(reject);
+    .catch((error) => {
+      console.error('Error fetching comments:', error);
+      reject(error);
+    });
 });
 
 const deleteComment = (commentId) => new Promise((resolve, reject) => {
@@ -21,9 +23,8 @@ const deleteComment = (commentId) => new Promise((resolve, reject) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.json();
+      resolve();
     })
-    .then(resolve)
     .catch(reject);
 });
 
