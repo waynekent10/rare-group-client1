@@ -1,17 +1,20 @@
-// import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import UserCard from '../../components/UserCard';
 import { getUsers } from '../../utils/data/userData';
 import { useAuth } from '../../utils/context/authContext';
 
 function User() {
-  const [users, setusers] = useState([]);
+  const [users, setUsers] = useState([]);
   // const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
-    getUsers(user.ucreated_on).then((data) => setusers(data));
-    // console.log(user);
+    if (user && user.uid) {
+      getUsers(user.uid).then((data) => {
+        console.log('Fetched Users:', data);
+        setUsers(data);
+      });
+    }
   }, [user]);
 
   return (
@@ -19,7 +22,7 @@ function User() {
       <h1>Users</h1>
 
       {users.map((aUser) => (
-        <section key={`user--${aUser.created_on}`} className="user">
+        <section key={`user--${aUser.uid}`} className="user">
           <UserCard
             first_name={aUser.first_name}
             last_name={aUser.last_name}

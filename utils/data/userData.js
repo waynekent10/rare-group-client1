@@ -15,11 +15,11 @@ const createUser = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleUser = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/users/${id}`, {
+const getSingleUser = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/users/${uid}`, {
     method: 'GET',
     headers: {
-      Authorization: id,
+      Authorization: uid,
     },
   })
     .then((response) => response.json())
@@ -33,6 +33,7 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
         email: data.email,
         created_on: data.created_on,
         is_staff: data.is_staff,
+        uid: data.uid,
       };
       resolve(user);
     })
@@ -56,14 +57,15 @@ const getUsers = (uid) => new Promise((resolve, reject) => {
         email: user.email,
         created_on: user.created_on,
         is_staff: user.is_staff,
+        uid: user.uid,
       }));
       resolve(users);
     })
     .catch(reject);
 });
 
-const updateUser = (payload, id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/users/${id}`, {
+const updateUser = (payload, uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/users/${uid}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
