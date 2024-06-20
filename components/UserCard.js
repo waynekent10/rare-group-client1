@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Card, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import { deleteUser } from '../utils/data/userData';
 import { useAuth } from '../utils/context/authContext';
 
 export default function UserCard({
@@ -19,13 +20,19 @@ export default function UserCard({
   const router = useRouter();
   const { user } = useAuth();
 
-  // console.log('from userCard: ***  ', 'first_name:', first_name, 'last_name:', last_name, 'bio:', bio, 'profile image url:', profile_image_url,'email:', email, 'created_on:', created_on, 'active:', active, 'is_staff:', is_staff, 'id:', id);
-
   const deleteThisUser = () => {
     if (window.confirm(`Delete ${first_name}`)) {
-      // deleteUser(id); //need to write frontend func
+      deleteUser(id);
       window.location.reload();
       router.push('/users');
+    }
+  };
+
+  const updateThisUser = () => {
+    if (router.route.includes('[id]')) {
+      router.push(`update/${id}`);
+    } else {
+      router.push(`users/update/${id}`);
     }
   };
 
@@ -42,9 +49,9 @@ export default function UserCard({
         <Link href={`/users/${id}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
-        <Link href={`update/${id}`} passHref>
-          <Button variant="info">EDIT</Button>
-        </Link>
+        <Button variant="info" onClick={updateThisUser} className="m-2">
+          EDIT
+        </Button>
         <Button variant="danger" onClick={deleteThisUser} className="m-2">
           DELETE
         </Button>
