@@ -26,6 +26,7 @@ const getSingleUser = (uid) => new Promise((resolve, reject) => {
     .then((data) => {
       // Extract the necessary fields from the user object
       const user = {
+        id: data.id,
         first_name: data.first_name,
         last_name: data.last_name,
         bio: data.bio,
@@ -50,6 +51,7 @@ const getUsers = (uid) => new Promise((resolve, reject) => {
     .then((data) => {
       // Extract the necessary fields from nested objects
       const users = data.map((user) => ({
+        id: user.id,
         first_name: user.first_name,
         last_name: user.last_name,
         bio: user.bio,
@@ -76,18 +78,42 @@ const updateUser = (payload, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteUser = (id) => new Promise((resolve, reject) => {
+const activateUser = (id) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/users/${id}`, {
-    method: 'DELETE',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({ active: 1 }),
   })
-    .then((data) => resolve((data)))
+    .then(() => resolve())
     .catch(reject);
 });
 
+const deactivateUser = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/users/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ active: 0 }),
+  })
+    .then(() => resolve())
+    .catch(reject);
+});
+
+// const deleteUser = (id) => new Promise((resolve, reject) => {
+//   fetch(`${endpoint}/users/${id}`, {
+//     method: 'DELETE',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//     .then((data) => resolve((data)))
+//     .catch(reject);
+// });
+
 // eslint-disable-next-line import/prefer-default-export
 export {
-  createUser, getSingleUser, getUsers, updateUser, deleteUser,
+  createUser, getSingleUser, getUsers, updateUser, activateUser, deactivateUser,
 };

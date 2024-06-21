@@ -49,7 +49,7 @@ function Posts() {
                 .map((post) => (
                   <tr key={`post--${post.id}`} className="post">
                     <td>{post?.title}</td>
-                    <td>{post?.rare_user.first_name}</td>
+                    <td>{post?.rare_user?.first_name}</td>
                     <td>{post?.category.label}</td>
                     <td>
                       <button
