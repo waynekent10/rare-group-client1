@@ -11,7 +11,6 @@ function User() {
   useEffect(() => {
     if (user && user.uid) {
       getUsers(user.uid).then((data) => {
-        console.log('Fetched Users:', data);
         setUsers(data);
       });
     }
