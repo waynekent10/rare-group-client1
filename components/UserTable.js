@@ -21,21 +21,24 @@ const UserTable = ({ users }) => {
       <h1 className="text-center mb-4">Users</h1>
       <table className="table">
         <tbody>
-          {users.map((aUser) => (
-            <tr key={`user--${aUser.id}`}>
-              <td>{`${aUser.first_name} ${aUser.last_name}`}</td>
-              <td>{aUser.active ? 'Active' : 'Inactive'}</td>
-              <td>{`${aUser.created_on}`}</td>
-              <td>
-                <Link href={`/users/${aUser.id}`} passHref>
-                  <Button variant="primary" className="m-2">VIEW</Button>
-                </Link>
-                <Button variant="info" onClick={() => updateThisUser(aUser.id)} className="m-2">
-                  EDIT
-                </Button>
-              </td>
-            </tr>
-          ))}
+          {users.map((aUser) => {
+            console.log('User:', aUser); // Debugging line
+            return (
+              <tr key={`user--${aUser.id}`}>
+                <td>{`${aUser.first_name} ${aUser.last_name}`}</td>
+                <td>{aUser.active === 1 ? 'Active' : 'Inactive'}</td>
+                <td>{`${aUser.created_on}`}</td>
+                <td>
+                  <Link href={`/users/${aUser.id}`} passHref>
+                    <Button variant="primary" className="m-2">VIEW</Button>
+                  </Link>
+                  <Button variant="info" onClick={() => updateThisUser(aUser.id)} className="m-2">
+                    EDIT
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
@@ -47,7 +50,7 @@ UserTable.propTypes = {
     uid: PropTypes.string.isRequired,
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
-    active: PropTypes.bool.isRequired,
+    active: PropTypes.number.isRequired,
     created_on: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
   })).isRequired,
