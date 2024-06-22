@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 const CommentCard = ({ comment, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(comment.content);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleUpdate = () => {
     onUpdate(comment.id, content);
@@ -12,7 +13,12 @@ const CommentCard = ({ comment, onUpdate, onDelete }) => {
   };
 
   const handleDelete = () => {
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
     onDelete(comment.id);
+    setShowDeleteModal(false);
   };
 
   return (
@@ -47,6 +53,21 @@ const CommentCard = ({ comment, onUpdate, onDelete }) => {
           </Button>
         </>
       )}
+
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this comment?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={confirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
