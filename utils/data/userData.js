@@ -30,6 +30,7 @@ const getSingleUser = (uid) => new Promise((resolve, reject) => {
         first_name: data.first_name,
         last_name: data.last_name,
         bio: data.bio,
+        active: data.active,
         profile_image_url: data.profile_image_url,
         email: data.email,
         created_on: data.created_on,
@@ -55,6 +56,7 @@ const getUsers = (uid) => new Promise((resolve, reject) => {
         first_name: user.first_name,
         last_name: user.last_name,
         bio: user.bio,
+        active: user.active,
         profile_image_url: user.profile_image_url,
         email: user.email,
         created_on: user.created_on,
@@ -86,8 +88,14 @@ const activateUser = (id) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify({ active: 1 }),
   })
-    .then(() => resolve())
-    .catch(reject);
+    .then((response) => {
+      if (response.ok) {
+        resolve();
+      } else {
+        reject(new Error(`Error: ${response.statusText}`));
+      }
+    })
+    .catch((error) => reject(new Error(error)));
 });
 
 const deactivateUser = (id) => new Promise((resolve, reject) => {
@@ -98,20 +106,15 @@ const deactivateUser = (id) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify({ active: 0 }),
   })
-    .then(() => resolve())
-    .catch(reject);
+    .then((response) => {
+      if (response.ok) {
+        resolve();
+      } else {
+        reject(new Error(`Error: ${response.statusText}`));
+      }
+    })
+    .catch((error) => reject(new Error(error)));
 });
-
-// const deleteUser = (id) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/users/${id}`, {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((data) => resolve((data)))
-//     .catch(reject);
-// });
 
 // eslint-disable-next-line import/prefer-default-export
 export {

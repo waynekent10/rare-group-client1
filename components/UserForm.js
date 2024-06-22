@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button, Form, FormLabel } from 'react-bootstrap';
 import {
-  createUser, getSingleUser, updateUser,
+  createUser, getSingleUser, updateUser, activateUser, deactivateUser,
 } from '../utils/data/userData';
 
 const initialState = {
@@ -46,6 +46,22 @@ export default function UserForm({ user, id }) {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const deactivateThisUser = () => {
+    if (window.confirm(`Deactivate ${currentUser.first_name} ${id}`)) {
+      deactivateUser(id);
+      window.location.reload();
+      router.push('/users');
+    }
+  };
+
+  const activateThisUser = () => {
+    if (window.confirm(`Activate ${currentUser.first_name} ${id}`)) {
+      activateUser(id);
+      window.location.reload();
+      router.push('/users');
+    }
   };
 
   const handleSubmit = (e) => {
@@ -128,6 +144,13 @@ export default function UserForm({ user, id }) {
             value={currentUser.profile_image_url}
             onChange={handleChange}
           />
+
+          <Button
+            variant={currentUser.active === 1 ? 'danger' : 'success'}
+            onClick={currentUser.active === 1 ? deactivateThisUser : activateThisUser}
+          >
+            {currentUser.active === 1 ? 'Deactivate' : 'Activate'}
+          </Button>
 
           <FormLabel>User Form for registering or updating your User email</FormLabel>
           <FloatingLabel controlId="floatingInput1" label="email" className="mb-3">

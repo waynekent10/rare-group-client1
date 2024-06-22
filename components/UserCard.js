@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import { deactivateUser } from '../utils/data/userData';
+import { deactivateUser, activateUser } from '../utils/data/userData';
 import { useAuth } from '../utils/context/authContext';
 
 export default function UserCard({
@@ -18,9 +18,17 @@ export default function UserCard({
   const { user } = useAuth();
   const [count, setCount] = useState(null);
 
-  const deleteThisUser = () => {
-    if (window.confirm(`Delete ${first_name} ${id}`)) {
+  const deactivateThisUser = () => {
+    if (window.confirm(`Deactivate ${first_name} ${id}`)) {
       deactivateUser(id);
+      window.location.reload();
+      router.push('/users');
+    }
+  };
+
+  const activateThisUser = () => {
+    if (window.confirm(`Activate ${first_name} ${id}`)) {
+      activateUser(id);
       window.location.reload();
       router.push('/users');
     }
@@ -58,8 +66,11 @@ export default function UserCard({
         <Button variant="info" onClick={updateThisUser} className="m-2">
           EDIT
         </Button>
-        <Button variant="danger" onClick={deleteThisUser} className="m-2">
-          deactivate
+        <Button
+          variant={active === 1 ? 'danger' : 'success'}
+          onClick={active === 1 ? deactivateThisUser : activateThisUser}
+        >
+          {active === 1 ? 'Deactivate' : 'Activate'}
         </Button>
       </div>
     </div>
