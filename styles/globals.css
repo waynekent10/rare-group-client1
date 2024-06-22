@@ -107,6 +107,80 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  border-top: 20px solid #000;
+  border-bottom: 20px solid #000;
+  border-left: 3px solid #000;
+  border-right: 3px solid #000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+  color: #333;
+}
+
+.form-control {
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+.form-control-content {
+  height: 200px; 
+}
+
+.form-select {
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+.form-submit-button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-submit-button:hover {
+  background-color: #555;
+}
+
+/* 
+.form-title {
+  text-align: center;
+  font-family: 'Arial';
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.post-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -163,7 +237,7 @@ body {
 
 .form-submit-button:hover {
   background-color: #555;
-}
+} */
 
 .users {
   display: flex;

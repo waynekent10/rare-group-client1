@@ -71,40 +71,6 @@ const PostForm = ({ postObj, user }) => {
     }
   };
   return (
-    // <>
-    //   <h1>Post Form</h1>
-    //   <>
-    //     <Form onSubmit={handleSubmit}>
-    //       <Form.Group className="mb-3">
-    //         <Form.Label>Title</Form.Label>
-    //         <Form.Control name="title" required value={formInput.title} onChange={handleChange} />
-    //         <Form.Label>Image</Form.Label>
-    //         <Form.Control name="image_url" required value={formInput.image_url} onChange={handleChange} />
-    //         <Form.Label>Content</Form.Label>
-    //         <Form.Control name="content" required value={formInput.content} onChange={handleChange} />
-    //       </Form.Group>
-    //       <Form.Label>Category</Form.Label>
-    //       <Form.Select
-    //         aria-label="category"
-    //         name="category"
-    //         onChange={handleChange}
-    //         className="mb-3"
-    //         value={formInput.category}
-    //         required
-    //       >
-    //         <option value="">Select Category</option>
-    //         {categories.map((categoryItem) => (
-    //           <option key={categoryItem.id} value={categoryItem.id}>
-    //             {categoryItem.label}
-    //           </option>
-    //         ))}
-    //       </Form.Select>
-    //       <Button variant="primary" type="submit">
-    //         Submit
-    //       </Button>
-    //     </Form>
-    //   </>
-    // </>
     <>
       <h1 className="form-title">Post Form</h1>
       <Form onSubmit={handleSubmit} className="post-form">
