@@ -18,7 +18,8 @@ const CommentCard = ({ comment, onUpdate, onDelete }) => {
   return (
     <div className="comment-card">
       <p>
-        <strong>{comment.author.username}</strong> <small>{new Date(comment.created_on).toLocaleString()}</small>
+        <strong>{comment.username}</strong>{' '}
+        <small>{new Date(comment.created_on).toLocaleString()}</small>
       </p>
       {isEditing ? (
         <Form.Group>
@@ -53,9 +54,7 @@ const CommentCard = ({ comment, onUpdate, onDelete }) => {
 CommentCard.propTypes = {
   comment: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    author: PropTypes.shape({
-      username: PropTypes.string.isRequired,
-    }).isRequired,
+    username: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     created_on: PropTypes.string.isRequired,
   }).isRequired,

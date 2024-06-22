@@ -14,13 +14,9 @@ const CommentForm = ({ postId, onCommentAdded }) => {
       post: postId,
       content,
     };
-    try {
-      const createdComment = await createComment(newComment);
-      onCommentAdded(createdComment);
-      setContent('');
-    } catch (error) {
-      console.error('Error adding comment:', error);
-    }
+    const createdComment = await createComment(newComment);
+    onCommentAdded(createdComment);
+    setContent('');
   };
 
   return (

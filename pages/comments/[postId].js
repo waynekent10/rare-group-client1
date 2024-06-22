@@ -12,12 +12,8 @@ const CommentsPage = () => {
 
   useEffect(() => {
     const fetchComments = async () => {
-      try {
-        const commentsData = await getComments(postId.toString());
-        setComments(commentsData);
-      } catch (error) {
-        console.error('Error fetching comments:', error);
-      }
+      const commentsData = await getComments(postId.toString());
+      setComments(commentsData);
     };
 
     fetchComments();
@@ -28,21 +24,13 @@ const CommentsPage = () => {
   };
 
   const handleDeleteComment = async (commentId) => {
-    try {
-      await deleteComment(commentId);
-      setComments(comments.filter((comment) => comment.id !== commentId));
-    } catch (error) {
-      console.error('Error deleting comment:', error);
-    }
+    await deleteComment(commentId);
+    setComments(comments.filter((comment) => comment.id !== commentId));
   };
 
   const handleCommentUpdate = async (commentId, content) => {
-    try {
-      const updatedComment = await updateComment(commentId, content);
-      setComments(comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment)));
-    } catch (error) {
-      console.error('Error updating comment:', error);
-    }
+    const updatedComment = await updateComment(commentId, content);
+    setComments(comments.map((comment) => (comment.id === updatedComment.id ? updatedComment : comment)));
   };
 
   return (
